@@ -31,77 +31,115 @@ console.log({car});
 
 
 
-QUE2
-// Question class
+// QUE2
+// // Question class
+// class Question {
+    
+//     constructor(text, options, correctAnswer) {
+//         this.text = text; 
+//         this.options = options; 
+//         this.correctAnswer = correctAnswer; 
+//     }
+
+//     checkAnswer(userAnswer) {
+
+//         if(userAnswer != this.correctAnswer){
+//             return false;
+//         }
+
+//         return true;
+//     }
+
+// }
+
+
+// // Quiz class
+// class Quiz {
+    
+//     constructor() {
+//         this.questions = []; 
+//         this.currentQuestionIndex = 0; 
+//         this.score = 0;  
+//     }
+
+
+//     addQuestion(question) {
+//         this.questions.push(question); 
+//     }
+
+
+//     nextQuestion() {
+//         this.currentQuestionIndex++; 
+//     }
+
+
+
+//     submitAnswer(userAnswer) {
+//     const currentQuestion = this.questions[this.currentQuestionIndex];
+    
+//     if (currentQuestion.checkAnswer(userAnswer)) {
+//         this.score++;
+//     }
+
+//     this.nextQuestion();
+//     }
+
+// }
+
+// const quiz = new Quiz(); 
+
+// quiz.addQuestion(new Question("What is the largest  bird in the world?", ["Eagle", "Owl", "Ostrich", "Parrot"], "Ostrich"));
+// quiz.addQuestion(new Question("What is the capital city of Uganda", ["Nairobi", "Kampala", "Dodoma", "Cape Town"], "Kampala"));
+
+
+// quiz.submitAnswer("Eagle");   
+// quiz.submitAnswer("Kampala"); 
+// console.log("Score: " + quiz.score); 
+
+
+
+
 class Question {
-    
     constructor(text, options, correctAnswer) {
-        this.text = text; 
-        this.options = options; 
-        this.correctAnswer = correctAnswer; 
+        this.text = text;
+        this.options = options;
+        this.correctAnswer = correctAnswer;
     }
-
-    // Method to check if the user answer is correct and return true if the answer is correct, false if not
     checkAnswer(userAnswer) {
-
-        if(userAnswer != this.correctAnswer){
-            return false;
-        }
-
-        return true;
+        return userAnswer === this.correctAnswer;
     }
-
 }
-
-// Quiz class
+const sampleQuestion = new Question(
+    "What is the capital city of Nigeria",
+    ["Cape town", "Dodoma", "Abuja", "Lagos"],
+);
+console.log(sampleQuestion.checkAnswer("Abuja"));
+console.log(sampleQuestion.checkAnswer("Abuja"));
 class Quiz {
-    
     constructor() {
-        this.questions = []; // An array of Question objects
-        this.currentQuestionIndex = 0; //  The index of the current question in the questions array.
-        this.score = 0; // The user's current score
+        this.questions = [];
+        this.currentQuestionIndex = 0;
+        this.score = 0;
     }
-
-    // Method that takes a Question object as a parameter and adds it to the questions array.
     addQuestion(question) {
-        this.questions.push(question); // Adds the question object to the questions array
+        this.questions.push(question);
     }
-
-
-    // Method that advances to the next question in the quiz by incrementing the currentQuestionIndex.
     nextQuestion() {
-        this.currentQuestionIndex++; // Increments the currentQuestionIndex
+        this.currentQuestionIndex++;
     }
-
-
-    // Method to submit a user's answer and update the score
     submitAnswer(userAnswer) {
-    // Get the current question from the questions array
-    const currentQuestion = this.questions[this.currentQuestionIndex];
-    
-    // Check if the user's answer is correct
-    if (currentQuestion.checkAnswer(userAnswer)) {
-        // Increment the score if the answer is correct
-        this.score++;
+        const currentQuestion = this.questions[this.currentQuestionIndex];
+        if (currentQuestion.checkAnswer(userAnswer)) {
+            this.score++;
+        }
+        this.nextQuestion();
     }
-
-    // Move to the next question
-    this.nextQuestion();
-    }
-
 }
-
-//Creates a new Quiz object
-const quiz = new Quiz(); 
-
-// Adding questions to the quiz
-quiz.addQuestion(new Question("What is the largest  bird in the world?", ["Eagle", "Owl", "Ostrich", "Parrot"], "Ostrich"));
-quiz.addQuestion(new Question("What is the capital city of Uganda", ["Nairobi", "Kampala", "Dodoma", "Cape Town"], "Kampala"));
-
-// Submitting answers to the quiz
-quiz.submitAnswer("Eagle"); // wrong  
-quiz.submitAnswer("Kampala"); // Correct
-
-
-// Outputs the user's score to the console
-console.log("Score: " + quiz.score); 
+const que = new Quiz();
+const question1 = new Question("What is 4*5", ["9", "8", "20"], "17");
+const question2 = new Question("which is the longest river in the world", ["Amazon", "Congo river", "Nile"], "Nile");
+que.addQuestion(question1);
+que.addQuestion(question2);
+que.submitAnswer("9");
+que.submitAnswer("Nile");
+console.log("Score:", que.score);
